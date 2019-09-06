@@ -1,8 +1,8 @@
 
 import { User } from '../../models/user';
 export interface IUserState {
-    users: User[] | null,
-    selectedUser: User | null
+    users: User[],
+    selectedUser: User
 }
 export const initialUserState : IUserState = {
     users: null,

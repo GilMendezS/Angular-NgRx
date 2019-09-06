@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Post } from 'src/app/models/post';
-import { PostService } from 'src/app/service/post.service';
-import { Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { IAppState } from '../../store/states/app.state';
+import { AddPostSuccess } from '../../store/actions/post';
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
@@ -9,15 +10,11 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class CreatePostComponent implements OnInit {
   post:Post = new Post();
-  constructor(private postService:PostService) { }
-  @Output() newPost = new EventEmitter();
+  constructor(private store: Store<IAppState>) { }
   ngOnInit() {
   }
   onSubmit(){
-    this.postService.createPost(this.post).subscribe(data => {
-      this.post = data;
-      this.newPost.next({data: this.post})
-    })
+    this.store.dispatch(new AddPostSuccess(this.post));
   }
   
 }

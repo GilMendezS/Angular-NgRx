@@ -12,18 +12,11 @@ export class UserService {
 
   getUsers(): Observable<any>{
     return this.http.get<User[]>(`${ this.API }/users`).pipe(
-      tap( data => {
-        console.log('request end')
-        console.log(data)
-      }),
+     
     )
   }
   getUser( id: number ): Observable<any> {
     return this.http.get<User>(`${ this.API }/users/${ id }`).pipe(
-      tap( ( data ) => {
-        console.log( 'user received' )
-        console.log( data )
-      })
     )
   }
   

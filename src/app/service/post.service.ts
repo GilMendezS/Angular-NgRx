@@ -9,13 +9,11 @@ import { Observable } from 'rxjs';
 })
 export class PostService {
   API:string = 'https://jsonplaceholder.typicode.com'
-
   constructor(private http:HttpClient) { }
 
   getPosts(): Observable<any> {
     return this.http.get<Post[]>(`${ this.API }/posts`)
       .pipe(
-        take(3),
         tap( data => {
           console.log(data)
         }),
